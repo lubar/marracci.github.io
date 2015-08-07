@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>DigitalGlobe Maps API</title>
+  <meta name='robots' content='index'/>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name='twitter:site' content='@digitalglobe' />
+  <meta property='og:site_name' content='DigitalGlobe Maps API' />
+  <meta name='twitter:url' content='https://maps.digitalglobe.com/' />
+  <meta name='twitter:domain' content='https://maps.digitalglobe.com/' />
+  <meta property='og:url' content='https://maps.digitalglobe.com/' />
+  <meta name='twitter:title' content='DigitalGlobe Maps API' />
+  <meta property='og:title' content='DigitalGlobe Maps API' />
+  <meta name='twitter:description' content='The DigitalGlobe Maps API delivers fast imagery everywhere on the planet. Choose a basemap, add street labels or your own custom data, and start building applications for web or mobile.' />
+  <meta property='og:description' content='The DigitalGlobe Maps API delivers fast imagery everywhere on the planet. Choose a basemap, add street labels or your own custom data, and start building applications for web or mobile.' />
+  <meta name='twitter:image' content='https://maps.digitalglobe.com/img/twitter-card.png' />
+  <meta name='st:image' content='https://maps.digitalglobe.com/img/twitter-card.png' />
+  <meta property='og:image' content='https://maps.digitalglobe.com/img/twitter-card.png' />
+  <meta property='og:type' content='website' />
+  <meta name='twitter:card' content='summary_large_image' />
+  <link rel='shortcut icon' href='img/favicon.png' type='image/x-icon' />
+  <script src='//app-ab08.marketo.com/js/forms2/js/forms2.min.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+  <link href='base.css' rel='stylesheet' />
+  <link href='site.css' rel='stylesheet' />
+<body class='fill-darken2'>
+
+<!-- INTRODUCTION -->
+<section class='fill-white'>
+
+  <div class='col12 clearfix text-right'>
+    <div class='limiter'>
+      <nav class='pad2'>
+        <a class='strong quiet space-left1' href='#'>Sign up</a>
+        <a class='strong quiet space-left1' href='#'>Pricing</a>
+        <a class='strong quiet space-left1' href='http://developer.digitalglobe.com/docs/maps-api/'>Developer docs</a>
+        <a class='strong quiet space-left1' href='#'>Sign in</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class='limiter'>
+    <div class='pad-top2 space-bottom4'>
+      <div class='col12'>
+        <h1>DigitalGlobe Maps API</h1>
+        <h2 class='space-bottom2'>Basemaps built for speed</h2>
+      </div>
+      <div class='col12 clearfix'>
+        <div class='col8 margin4r'>
+          <h3>The DigitalGlobe Maps API delivers fast imagery everywhere on the planet. Choose a basemap, add street labels or your own custom data, and start building applications for web or mobile.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col12 clearfix mobile-cols'>
+    <div class='col6 contain pad4xr basemap-intro'>
+      <a href='#basemap' class='fill-dark dark pad2 block round pin-topright top80 z1'>
+        <div class='pin-topright pad1'>
+          <span class='dot inline fill-blue'>
+            <span class='icon i-arrow-down'></span>
+          </span>
+        </div>
+        <h4>Basemap</h4>
+        <p class='quiet'>Global basemap</p>
+      </a>
+
+      <div class='col12 device round-topright'>
+        <div class='map dark' id='map-one'></div>
+      </div>
+    </div>
+
+    <div class='col6 contain pad4xl basemap-intro'>
+      <a href='#basemap-vivid' class='fill-dark dark pad2 block round pin-bottomleft bottom80 z1'>
+        <div class='pin-topright pad1'>
+          <span class='dot inline fill-blue'>
+            <span class='icon i-arrow-down'></span>
+          </span>
+        </div>
+        <h4>Basemap +Vivid</h4>
+        <p class='quiet'>Seamless color correct imagery</p>
+      </a>
+
+      <div class='col12 device round-topleft'>
+        <div class='map dark' id='map-two'></div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col12 limiter'>
+    <div class='pad4y'>
+      <div class='center'>
+        <a href='https://mapbox.com/about/' class='sprite s-mapbox-powered'></a>
+      </div>
+      <h3>With open Mapbox infrastructure and APIs, the <a href='#api'>DigitalGlobe Maps API</a> makes it easy to build scalable applications with the best imagery everywhere in the world.</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Basemap -->
+<section id='basemap' class='fill-darken0 clip dark'>
+
+  <div class='col12 limiter contain'>
+    <div class='space-bottom4 pad-top8'>
+      <h2 class='space-bottom1'>Basemap</h2>
+      <h3>Satellite basemaps everywhere in the world</h3>
+    </div>
+  </div>
+
+  <div class='limiter contain'>
+    <div class='col12 clearfix'>
+      <div class='margin7 col5 space-bottom4'>
+        <div class='space-left4 no-mobile-margin'>
+          <div class='col12 space-bottom2 feature contain'>
+            <div class='square60 pin-topleft icon i-coverage'></div>
+            <div class='space-left7 pad0y'>
+              <h4>Planet-wide coverage</h4>
+              <p class='quiet'>High resolution imagery everywhere on earth</p>
+            </div>
+          </div>
+          <div class='col12 space-bottom2 feature contain'>
+            <div class='square60 pin-topleft icon i-frequency'></div>
+            <div class='space-left7 pad0y'>
+              <h4>High frequency updates</h4>
+              <p class='quiet'>The most recent imagery from DigitalGlobe's satellite constellation</p>
+            </div>
+          </div>
+          <div class='col12 space-bottom2 contain'>
+            <div class='no-mobile-margin space-left7 fill-dark dark round'>
+              <div class='pad2'>
+                <h4 class='icon i-document'>Datasheet</h4>
+              </div>
+              <a href='https://dg-cms-uploads-production.s3.amazonaws.com/uploads/document/file/22/GlobalBasemap-DS-GBM-PROD.pdf' class='button col12 round-bottom'>Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col9 fr pull-left2 pin-topleft mobile-relative'>
+        <div class='col12 device round-topright'>
+          <div class='col12 clearfix pin-top pad1 z1 text-right contain'>
+            <div class='fill-white inline round truncate paging-controls'>
+              <a
+                href='#'
+                data-pager='js-api-examples'
+                class='icon i-arrow-left keyline-right round-left js-previous fill-white round-left'></a>
+              <span class='inline pad1x'>Example</span>
+              <a
+                href='#'
+                data-pager='js-api-examples'
+                class='icon i-arrow-right keyline-left round-right js-next fill-white round-right'></a>
+            </div>
+          </div>
+          <div class='map dark' id='map-three'></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Basemap + Vivid -->
+<section id='basemap-vivid' class='fill-darken1 clip dark'>
+
+  <div class='col12 limiter clearfix contain'>
+    <div class='col4 pad-top8'>
+      <div class='space-bottom4'>
+        <h2 class='space-bottom1'>+Vivid</h2>
+        <h3>High-resolution, satellite imagery maps</h3>
+      </div>
+      <div class='col12 space-bottom2 feature contain'>
+        <div class='square60 pin-topleft icon i-mosaic'></div>
+        <div class='space-left7 pad0y'>
+          <h4>Regional mosaics</h4>
+          <p class='quiet'>Select the countries you need.</p>
+        </div>
+      </div>
+      <div class='col12 space-bottom2 feature contain'>
+        <div class='square60 pin-topleft icon i-pixels'></div>
+        <div class='space-left7 pad0y'>
+          <h4>Pixel perfect</h4>
+          <p class='quiet'>Beautiful imagery combined into seamless, cloudless mosaics.</p>
+        </div>
+      </div>
+      <div class='col12 space-bottom2 contain'>
+        <div class='no-mobile-margin fill-dark space-left7 dark round'>
+          <div class='pad2'>
+            <h4 class='icon i-document'>Datasheet</h4>
+          </div>
+          <a href='https://dg-cms-uploads-production.s3.amazonaws.com/uploads/document/file/2/DG_Basemap_Vivid_DS.pdf' class='button col12 round-bottom'>Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class='col10 pull-right2 pin-bottomright top80 mobile-relative'>
+      <div class='col12 clearfix center space-bottom4'>
+        <div class='radio-pill pill mobile-cols clearfix'>
+          <input type='radio' name='vivid-toggle' data-tab='vivid-examples' id='tab-examples' checked='checked'><!--
+          --><label for='tab-examples' class='button'>Examples</label><!--
+          --><input type='radio' name='vivid-toggle' data-tab='vivid-coverage' id='tab-coverage'><!--
+          --><label for='tab-coverage' class='button'>Coverage Map</label>
+        </div>
+      </div>
+
+      <div class='col12 device round-topleft space-left4'>
+
+        <!-- Examples tab -->
+        <div id='vivid-examples' class='tab-content active'>
+          <div class='col12 clearfix pin-top pad1 z1 contain'>
+            <div class='fill-white inline round truncate paging-controls'>
+              <a
+                href='#'
+                data-pager='js-api-examples'
+                class='icon i-arrow-left keyline-right round-left js-previous fill-white round-left'></a>
+              <span class='inline pad1x'>Country A</span>
+              <a
+                href='#'
+                data-pager='js-api-examples'
+                class='icon i-arrow-right keyline-left round-right js-next fill-white round-right'></a>
+            </div>
+          </div>
+          <div class='map dark' id='map-four'></div>
+        </div>
+
+        <!-- Coverage tab -->
+        <div id='vivid-coverage' class='tab-content'>
+          <div class='map dark' id='map-coverage'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Maps API -->
+<section id='api' class='fill-darken2 dark'>
+
+  <div class='col12 limiter clearfix space-bottom2'>
+    <div class='col12 pad-top8 space-bottom4 clearfix'>
+      <div class='col6'>
+        <div class='space-bottom2'>
+          <h2 class='space-bottom1'>Maps API</h2>
+          <h3>Powered by open Mapbox APIs to make building scalable applications for web and mobile easy.</h3>
+        </div>
+        <a href='http://developer.digitalglobe.com/docs/maps-api/' class='button'>API documentation</a>
+      </div>
+      <div class='col6 pad2x pad-top4'>
+        <div class='col12 space-bottom2 feature contain'>
+          <div class='square60 pin-topleft icon i-interactivity'></div>
+          <div class='space-left7 pad0y'>
+            <h4>Add interactivity with Mapbox.js</h4>
+            <p class='quiet'>Add labels, markers, and interactivity. <a href='https://mapbox.com/mapbox.js/'>Learn more</a></p>
+          </div>
+        </div>
+        <div class='col12 space-bottom2 feature contain'>
+          <div class='square60 pin-topleft icon i-global'></div>
+          <div class='space-left7 pad0y'>
+            <h4>Global infrastructure</h4>
+            <p class='quiet'>Fast maps everywhere thanks to the Mapbox platform</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='limiter'>
+    <div class='col12 clearfix'>
+      <div id='js-api-examples' class='device round-top'>
+        <div class='col12 clearfix pin-bottom center pad2y z1'>
+          <div class='fill-white inline round truncate paging-controls'>
+            <a
+              href='#'
+              data-pager='js-api-examples'
+              class='icon i-arrow-left keyline-right round-left js-previous fill-white round-left'></a>
+            <span class='inline pad1x'></span>
+            <a
+              href='#'
+              data-pager='js-api-examples'
+              class='icon i-arrow-right keyline-left round-right js-next fill-white round-right'></a>
+          </div>
+        </div>
+        <div id='map-toggling' class='map tab-content'>
+          <nav id='menu-ui' class='menu-ui z1'></nav> 
+        </div>
+        <div id='map-geojson' class='map tab-content'></div>
+        <div id='map-swiping' class='map tab-content'>
+          <input id='js-range' type='range' min='0' max='1.0' step='any' /> 
+        </div>
+        <div id='map-kml' class='map tab-content'></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id='contact' class='pad4y fill-white'>
+  <div class='col12 limiter clearfix'>
+    <div class='space-bottom2 pad-top4'>
+      <h2>Contact to learn more</h2>
+    </div>
+  </div>
+
+  <div class='col12 limiter clearfix'>
+    <div class='col8 margin4r'>
+      <form id='mktoForm_1509'></form>
+      <script>// <![CDATA[
+      MktoForms2.loadForm('//app-ab08.marketo.com', '918-HBW-945', 1509);
+      // ]]></script>
+    </div>
+  </div>
+</footer>
+
+<script src='build.js'></script>
+</body>
+</html>
