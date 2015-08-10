@@ -261,6 +261,14 @@ a.fill-dark {
 .tab-content { display:none; }
 .tab-content.active { display:block; }
 
+.info-section {
+  margin-top: 20px;
+}
+
+.body-section {
+  padding: 0 50px;
+}
+
 input[type=range],
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance:none;
