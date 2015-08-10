@@ -958,23 +958,6 @@ img.inline, .inline           { display:inline-block; }
   label .inline a { font-weight:normal; }
   [type=submit]   { width:100%; }
 
-  .row1  { height:auto; min-height: 40px;}
-  .row2  { height:auto; min-height: 80px;}
-  .row3  { height:auto; min-height: 120px;}
-  .row4  { height:auto; min-height: 160px;}
-  .row5  { height:auto; min-height: 200px;}
-  .row6  { height:auto; min-height: 240px;}
-  .row7  { height:auto; min-height: 280px;}
-  .row8  { height:auto; min-height: 320px;}
-  .row9  { height:auto; min-height: 360px;}
-  .row10 { height:auto; min-height: 400px;}
-  .row11 { height:auto; min-height: 440px;}
-  .row12 { height:auto; min-height: 480px;}
-  .row13 { height:auto; min-height: 520px;}
-  .row14 { height:auto; min-height: 560px;}
-  .row15 { height:auto; min-height: 600px;}
-  .row16 { height:auto; min-height: 640px;}
-
   .col1,
   .col2,
   .col3,
