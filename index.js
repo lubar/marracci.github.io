@@ -1,7 +1,13 @@
 'use strict';
 
 /* global L d3 */
-L.mapbox.accessToken = 'pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6IjRmMTFiNWYyZjg1NjU2ZDdlZDQ1ODlkOTE0Nzg2ZTkxIn0.v7N1YNXeOR5yfR_gHDiNjA';
+require('d3');
+require('mapbox.js');
+L.mapbox.accessToken = process.env.TOKEN;
+
+var omnivore = require('leaflet-omnivore');
+var geojsonData = require('./js/geojson-data');
+var coverageData = require('./js/coverage-data');
 
 // Avoid the page jump due to overflow clipping on the page?
 // https://github.com/Leaflet/Leaflet/issues/2463
@@ -17,6 +23,26 @@ function refreshMaps() {
   }
 }
 
+coverageData.forEach((region) => {
+  var parent = d3.select('#js-coverage').append('div');
+  parent.attr('class', 'space-bottom1');
+
+  parent
+    .append('div')
+    .attr('class', 'strong')
+    .text(region.section);
+
+  parent
+    .selectAll('div')
+    .data(region.coverage)
+    .enter()
+    .append('div')
+    .attr('class', 'quiet')
+    .text((d) => {
+      return d;
+    });
+});
+
 maps.one = L.mapbox.map('map-one', 'mapbox.satellite', {
   zoomControl: false,
   attributionControl: false
@@ -27,16 +53,79 @@ maps.two = L.mapbox.map('map-two', 'mapbox.satellite', {
   attributionControl: false
 }).setView([-16.2114, 128.2324], 10);
 
-maps.three = L.mapbox.map('map-three', 'mapbox.satellite', {
+maps.one.scrollWheelZoom.disable();
+maps.one.touchZoom.disable();
+
+maps.two.scrollWheelZoom.disable();
+maps.two.touchZoom.disable();
+
+var $vividExamples = d3.select('#vivid-examples');
+var $vividCoverage = d3.select('#vivid-coverage');
+
+// Basemap + Vivid toggle
+d3.selectAll('[name="vivid-toggle"]').on('change', () => {
+  var val = d3.event.target.getAttribute('data-tab');
+
+  $vividExamples.classed('active', () => {
+    return $vividExamples.node().id === val;
+  });
+
+  $vividCoverage.classed('active', () => {
+    return $vividCoverage.node().id === val;
+  });
+
+  refreshMaps();
+});
+
+// ===================
+// Basemap examples
+// ===================
+var basemapExamples = [
+  { title: 'Washington DC', coords: '38.87297,-77.00732', zoom: 16 },
+  { title: 'Boston', coords: '42.36,-71', zoom: 11 },
+  { title: 'Madrid', coords: '40.4,-3.7', zoom: 11 },
+  { title: 'Jerusalem', coords: '31.76,35.2', zoom: 11}
+];
+
+maps.basemap = L.mapbox.map('basemap', 'mapbox.satellite', {
   zoomControl: false,
   attributionControl: false
-}).setView({lat: 38.87297, lng: -77.00732}, 16);
+}).setView(basemapExamples[0].coords.split(','), basemapExamples[0].zoom);
 
-maps.four = L.mapbox.map('map-four', 'mapbox.satellite', {
+maps.basemap.scrollWheelZoom.disable();
+maps.basemap.touchZoom.disable();
+
+var bm = d3.select('#basemap');
+bm.attr('data-examples', JSON.stringify(basemapExamples));
+
+// Set the first example
+bm.select('span').text(basemapExamples[0].title);
+
+// ===================
+// +Vivid examples
+// ===================
+var vividExamples = [
+  { title: 'Country A', coords: '-16.2114,128.2324', zoom: 10 },
+  { title: 'Boston', coords: '42.36,-71', zoom: 11 },
+  { title: 'Madrid', coords: '40.4,-3.7', zoom: 11 },
+  { title: 'Jerusalem', coords: '31.76,35.2', zoom: 11}
+];
+
+var v = d3.select('#map-vivid');
+v.attr('data-examples', JSON.stringify(vividExamples));
+
+// Set the first example
+v.select('span').text(vividExamples[0].title);
+
+maps.vivid = L.mapbox.map('map-vivid', 'mapbox.satellite', {
   zoomControl: false,
   attributionControl: false
-}).setView([-16.2114, 128.2324], 10);
+}).setView(vividExamples[0].coords.split(','), vividExamples[0].zoom);
 
+maps.vivid.scrollWheelZoom.disable();
+maps.vivid.touchZoom.disable();
+
+// Coverage map
 // Restrict panning to one copy of the world
 var southWest = L.latLng(-90, -180),
     northEast = L.latLng(90, 180),
@@ -48,77 +137,14 @@ maps.coverage = L.mapbox.map('map-coverage', 'tristen.8182c767', {
   minZoom: 2,
   maxBounds: bounds,
   attributionControl: false
-}).setView([33.137551192346145, 10.72265625], 2);
-
-maps.one.scrollWheelZoom.disable();
-maps.one.touchZoom.disable();
-
-maps.two.scrollWheelZoom.disable();
-maps.two.touchZoom.disable();
-
-maps.three.scrollWheelZoom.disable();
-maps.three.touchZoom.disable();
-
-maps.four.scrollWheelZoom.disable();
-maps.four.touchZoom.disable();
+}).setView([14.093957177836236, 3.076171875], 3);
 
 maps.coverage.scrollWheelZoom.disable();
 maps.coverage.touchZoom.disable();
 
-// Paging controls
-// ===================
-function page(_this, state) {
-  var parent = d3.select('#' + d3.select(_this).attr('data-pager'));
-  var slides = JSON.parse(parent.attr('data-slides'));
-  var current = parent.select('.active');
-  var titleCard = parent.select('span');
-  var index = 0;
-
-  // Find the current index
-  slides.forEach(function(s, i) {
-    if (s.id === current.node().id) index = i;
-  });
-
-  if (state === 'next') {
-    index = ((index + 1) > (slides.length - 1)) ? 0 : index + 1;
-  } else {
-    index = ((index - 1) < 0) ? slides.length - 1 : index - 1;
-  }
-
-  titleCard.text(slides[index].title);
-  current.classed('active', false);
-  parent.select('#' + slides[index].id).classed('active', true);
-  refreshMaps();
-}
-
-d3.selectAll('.js-next').on('click', function() {
-  d3.event.preventDefault();
-  page(this, 'next');
-});
-
-d3.selectAll('.js-previous').on('click', function() {
-  d3.event.preventDefault();
-  page(this, 'previous');
-});
-
-
-var $vividExamples = d3.select('#vivid-examples');
-var $vividCoverage = d3.select('#vivid-coverage');
-
-// Basemap + Vivid toggle
-d3.selectAll('[name="vivid-toggle"]').on('change', function() {
-  var val = d3.event.target.getAttribute('data-tab');
-
-  $vividExamples.classed('active', function() {
-    return $vividExamples.node().id === val;
-  });
-
-  $vividCoverage.classed('active', function() {
-    return $vividCoverage.node().id === val;
-  });
-
-  refreshMaps();
-});
+//maps.coverage.on('moveend', () => {
+  //console.log(maps.coverage.getCenter());
+//});
 
 // ===================
 // Mapbox.js Examples
@@ -210,7 +236,7 @@ maps.swipe.setView([49.434, -123.272], 7);
 // Example: Loading KML data
 // ===================
 var kmlTheme = L.geoJson(null, {
-  style: function() {
+  style() {
     return {
       'color': '#fa946e',
       'opacity': 1,
@@ -226,4 +252,76 @@ maps.kml = L.mapbox.map('map-kml', 'mapbox.satellite', {
 maps.kml.scrollWheelZoom.disable();
 maps.kml.touchZoom.disable();
 
-omnivore.kml('js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
+omnivore.kml('/js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
+
+// Paging controls
+// ===================
+function page(_this, state) {
+  var parent = d3.select('#' + _this.getAttribute('data-pager'));
+  var slides = JSON.parse(parent.attr('data-slides'));
+  var current = parent.select('.tab-content.active');
+  var titleCard = parent.select('span');
+  var index = 0;
+
+  // Find the current index
+  slides.forEach((s, i) => {
+    if (s.id === current.node().id) index = i;
+  });
+
+  if (state === 'next') {
+    index = ((index + 1) > (slides.length - 1)) ? 0 : index + 1;
+  } else {
+    index = ((index - 1) < 0) ? slides.length - 1 : index - 1;
+  }
+
+  titleCard.text(slides[index].title);
+  current.classed('active', false);
+  parent.select('#' + slides[index].id).classed('active', true);
+  refreshMaps();
+}
+
+d3.selectAll('.js-next').on('click', function() {
+  d3.event.preventDefault();
+  page(this, 'next');
+});
+
+d3.selectAll('.js-previous').on('click', function() {
+  d3.event.preventDefault();
+  page(this, 'previous');
+});
+
+// Example switching
+// ===================
+function example(_this, state) {
+  var mapId = _this.getAttribute('data-map');
+  var parent = d3.select('#' + _this.getAttribute('data-parent'));
+
+  var examples = JSON.parse(parent.attr('data-examples'));
+  var titleCard = parent.select('span');
+  var index = 0;
+
+  // Find the current index
+  examples.forEach((e, i) => {
+    if (e.title === titleCard.node().textContent) index = i;
+  });
+
+  if (state === 'next') {
+    index = ((index + 1) > (examples.length - 1)) ? 0 : index + 1;
+  } else {
+    index = ((index - 1) < 0) ? examples.length - 1 : index - 1;
+  }
+
+  titleCard.text(examples[index].title);
+  maps[mapId].setView(examples[index].coords.split(','), examples[index].zoom);
+}
+
+d3.selectAll('.js-example-next').on('click', function() {
+  d3.event.preventDefault();
+  example(this, 'next');
+});
+
+d3.selectAll('.js-example-previous').on('click', function() {
+  d3.event.preventDefault();
+  example(this, 'previous');
+});
+

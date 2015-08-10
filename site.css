@@ -38,7 +38,8 @@
   font-style:normal;
   }
 
-body {
+body,
+.leaflet-container {
   font:normal 16px/1.6667 'Din regular', 'Helvetica neue', Helvetica, sans-serif;
   }
 .paging-controls,
@@ -46,10 +47,15 @@ body {
 .map .button {
   font:700 15px/20px 'Helvetica neue', 'Helvetica', sans-serif;
   }
+.prose-big p {
+  font-family:'Din extra thin';
+  font-size:22px;
+  line-height:32px;
+  }
 
 /* HTML elements */
 h1 { font-family:'Din bold'; font-size:22px; }
-h2 { font-family:'Din extra thin'; font-size:52px; line-height:56px; }
+h2 { font-family:'Din extra thin'; font-size:48px; line-height:54px; }
 h3 { font-family:'Din extra thin'; font-size:28px; line-height:38px; }
 h4 { font-family:'Din bold'; font-size:16px; }
 
@@ -79,8 +85,12 @@ section {
   }
 
 .map.leaflet-container {
-  background-color:transparent;
+  background-color:#ddd;
   }
+  .map.leaflet-container.fill-blue {
+    background-color:#003A5E;
+    }
+
 .map {
   position:absolute;
   width:100%;
@@ -100,6 +110,7 @@ section {
   }
 
 .fill-white  { background-color:#fff; }
+.fill-light  { background-color:#ddd; }
 .fill-blue   { background-color:#4698ca; }
 .fill-green  { background-color:#709900; }
 
@@ -171,7 +182,7 @@ section {
 .z100 { z-index:100; }
 
 /* Colors */
-.fill-dark    { background:rgba(0,0,0,0.25); }
+.fill-dark    { background:rgba(0,0,0,0.8); }
 .fill-darken0 { background:#003A5E; }
 .fill-darken1 { background:#00304d; }
 .fill-darken2 { background:#00253c; }
@@ -186,8 +197,9 @@ section {
     }
 
 /* Forms */
-.radio-pill input[type=radio] + .button       { background-color:rgba(0,0,0,0.25); padding:10px 30px; }
-.radio-pill input[type=radio] + .button:hover { background-color:rgba(0,0,0,0.35); }
+.pill > * { border:none; }
+.radio-pill input[type=radio] + .button       { background-color:rgba(0,0,0,0.4); padding:10px 30px; }
+.radio-pill input[type=radio] + .button:hover { background-color:rgba(0,0,0,0.5); }
 
 .radio-pill input[type=radio]:checked + .button:hover,
 .radio-pill input[type=radio]:checked + .button { background-color:#7caa00; color:#fff; }
@@ -211,6 +223,31 @@ section {
     }
 
 /* Custom styling */
+.overlay-container {
+  background-color:rgba(255,255,255,1);
+  }
+
+.overflow {
+  overflow:auto;
+  }
+.overflow::-webkit-scrollbar {
+  width:8px;
+  height:8px;
+  background:rgba(255,255,255,0.1);
+  border-radius:0;
+  border:none;
+  }
+.overflow::-webkit-scrollbar:hover {
+  background:rgba(255,255,255,0.15);
+  }
+.overflow::-webkit-scrollbar-track {
+  background:none;
+  }
+.overflow::-webkit-scrollbar-thumb {
+  background:rgba(255,255,255,0.1);
+  border-radius:0;
+  }
+
 .dot {
   width:30px;
   height:30px;
@@ -220,28 +257,28 @@ section {
 .basemap-intro .device {
   min-height:480px;
   }
-  .basemap-intro .device,
-  .basemap-intro .device .map {
-    border-radius:0 0 6px 6px;
+  .basemap-intro:first-child .device .map,
+  .basemap-intro:first-child .device {
+    border-radius:0 0 6px 0;
+    z-index:0;
+    }
+  .basemap-intro:last-child .device .map,
+  .basemap-intro:last-child .device {
+    border-radius:0 0 0 6px;
     z-index:0;
     }
 
+.fill-dark a,
 a.fill-dark {
-  background:#202020;
   color:#fff;
   }
+  .fill-dark a:hover,
   a.fill-dark:hover {
     background:#000;
     color:#fff;
     }
   a.fill-dark:hover .fill-blue { background-color:#317dac; }
 
-.paging-controls,
-.paging-controls a { color:rgba(0,0,0,0.75); }
-.paging-controls a:hover {
-  background-color:#eee;
-  color:rgba(0,0,0,0.75);
-  }
 .paging-controls.paging-controls a { border-color:rgba(0,0,0,0.1); }
 .paging-controls * {
   text-align:center;
@@ -403,16 +440,17 @@ input[type=range]::-moz-range-thumb {
   .pull-right10,
   .pull-right11,
   .pull-right12 { right:0; }
-  .mobile-relative { position:relative; }
   .device { margin:0; }
 
   .top40  { top:20px; }
   .top80  { top:40px; }
   .bottom40  { bottom:20px; }
   .bottom80  { bottom:40px; }
+  .space-bottom4 { margin-bottom:20px; }
 
-  .device {
-    min-height:360px;
-    }
+  .map.leaflet-container,
+  .basemap-intro .device,
+  .device { min-height:360px; position:relative; }
   .no-mobile-margin { margin:0; }
+  .overlay-container { padding:0; width:100%; }
 }
