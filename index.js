@@ -1,12 +1,7 @@
 'use strict';
 
 /* global L d3 */
-require('d3');
-require('mapbox.js');
-L.mapbox.accessToken = process.env.TOKEN;
-
-var omnivore = require('leaflet-omnivore');
-var geojsonData = require('./js/geojson-data');
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6IjRmMTFiNWYyZjg1NjU2ZDdlZDQ1ODlkOTE0Nzg2ZTkxIn0.v7N1YNXeOR5yfR_gHDiNjA';
 
 // Avoid the page jump due to overflow clipping on the page?
 // https://github.com/Leaflet/Leaflet/issues/2463
@@ -80,7 +75,7 @@ function page(_this, state) {
   var index = 0;
 
   // Find the current index
-  slides.forEach((s, i) => {
+  slides.forEach(function(s, i) {
     if (s.id === current.node().id) index = i;
   });
 
@@ -111,14 +106,14 @@ var $vividExamples = d3.select('#vivid-examples');
 var $vividCoverage = d3.select('#vivid-coverage');
 
 // Basemap + Vivid toggle
-d3.selectAll('[name="vivid-toggle"]').on('change', () => {
+d3.selectAll('[name="vivid-toggle"]').on('change', function() {
   var val = d3.event.target.getAttribute('data-tab');
 
-  $vividExamples.classed('active', () => {
+  $vividExamples.classed('active', function() {
     return $vividExamples.node().id === val;
   });
 
-  $vividCoverage.classed('active', () => {
+  $vividCoverage.classed('active', function() {
     return $vividCoverage.node().id === val;
   });
 
@@ -215,7 +210,7 @@ maps.swipe.setView([49.434, -123.272], 7);
 // Example: Loading KML data
 // ===================
 var kmlTheme = L.geoJson(null, {
-  style() {
+  style: function() {
     return {
       'color': '#fa946e',
       'opacity': 1,
@@ -231,4 +226,4 @@ maps.kml = L.mapbox.map('map-kml', 'mapbox.satellite', {
 maps.kml.scrollWheelZoom.disable();
 maps.kml.touchZoom.disable();
 
-omnivore.kml('/js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
+omnivore.kml('js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
