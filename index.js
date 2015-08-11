@@ -245,7 +245,7 @@ maps.kml = L.mapbox.map('map-kml', 'mapbox.satellite', {
 maps.kml.scrollWheelZoom.disable();
 maps.kml.touchZoom.disable();
 
-// omnivore.kml('/js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
+omnivore.kml('/js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
 
 // Paging controls
 // ===================
