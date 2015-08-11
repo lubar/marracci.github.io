@@ -16,14 +16,25 @@
   <meta property='og:description' content='The DigitalGlobe Maps API delivers fast imagery everywhere on the planet. Choose a basemap, add street labels or your own custom data, and start building applications for web or mobile.' />
   <meta property='og:type' content='website' />
   <link rel='shortcut icon' href='img/favicon.png' type='image/x-icon' />
-  <script src='//app-ab08.marketo.com/js/forms2/js/forms2.min.js'></script>
+  <script src='http://app-ab08.marketo.com/js/forms2/js/forms2.min.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
   <link href='base.css' rel='stylesheet' />
   <link href='site.css' rel='stylesheet' />
+
+  <script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+  <script src='http://d3js.org/d3.v2.min.js'></script>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+  <!-- Import datasets -->
+  <script>
+    window.importData = {};
+  </script>
+  <script src="js/coverage-data.js"></script>
+  <script src="js/geojson-data.js"></script>
 <body>
 
 <!-- INTRODUCTION -->
-<section class='fill-white body-section'>
+<section class='fill-white'>
 
   <div class='col12 clearfix text-right'>
     <div class='limiter'>
@@ -218,7 +229,7 @@
 </section>
 
 <!-- Maps API -->
-<section id='api' class='fill-darken2 dark info-section'>
+<section id='api' class='fill-darken2 dark'>
 
   <div class='col12 limiter clearfix space-bottom2'>
     <div class='col12 pad-top8 space-bottom4 clearfix'>
@@ -280,7 +291,7 @@
 <footer id='contact' class='pad4y fill-white'>
   <div class='col12 limiter clearfix'>
     <div class='space-bottom2 pad-top4'>
-      <h2 class='space-bottom1'>Contact us to join the beta program</h2>
+      <h2 class='space-bottom1'>Contact to learn more</h2>
     </div>
   </div>
 
@@ -288,12 +299,12 @@
     <div class='col8 margin4r'>
       <form id='mktoForm_1509'></form>
       <script>// <![CDATA[
-      MktoForms2.loadForm('//app-ab08.marketo.com', '918-HBW-945', 1509);
+      MktoForms2.loadForm('http://app-ab08.marketo.com', '918-HBW-945', 1509);
       // ]]></script>
     </div>
   </div>
 </footer>
 
-<script src='build.js'></script>
+<script src='index.js'></script>
 </body>
 </html>

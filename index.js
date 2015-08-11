@@ -1,13 +1,6 @@
 'use strict';
 
-/* global L d3 */
-require('d3');
-require('mapbox.js');
-L.mapbox.accessToken = process.env.TOKEN;
-
-var omnivore = require('leaflet-omnivore');
-var geojsonData = require('./js/geojson-data');
-var coverageData = require('./js/coverage-data');
+L.mapbox.accessToken = 'pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImYzOGIxMGFiY2U2OWFhYmY1OTliMWZiNmU0ZDI4YTA2In0.tpI2apP54MEj7xUiuSOWNQ';
 
 // Avoid the page jump due to overflow clipping on the page?
 // https://github.com/Leaflet/Leaflet/issues/2463
@@ -23,7 +16,7 @@ function refreshMaps() {
   }
 }
 
-coverageData.forEach((region) => {
+importData.coverage.forEach(function(region) {
   var parent = d3.select('#js-coverage').append('div');
   parent.attr('class', 'space-bottom1');
 
@@ -38,7 +31,7 @@ coverageData.forEach((region) => {
     .enter()
     .append('div')
     .attr('class', 'quiet')
-    .text((d) => {
+    .text(function(d) {
       return d;
     });
 });
@@ -63,14 +56,14 @@ var $vividExamples = d3.select('#vivid-examples');
 var $vividCoverage = d3.select('#vivid-coverage');
 
 // Basemap + Vivid toggle
-d3.selectAll('[name="vivid-toggle"]').on('change', () => {
+d3.selectAll('[name="vivid-toggle"]').on('change', function() {
   var val = d3.event.target.getAttribute('data-tab');
 
-  $vividExamples.classed('active', () => {
+  $vividExamples.classed('active', function() {
     return $vividExamples.node().id === val;
   });
 
-  $vividCoverage.classed('active', () => {
+  $vividCoverage.classed('active', function() {
     return $vividCoverage.node().id === val;
   });
 
@@ -204,7 +197,7 @@ maps.geojsonExample = L.mapbox.map('map-geojson', 'mapbox.satellite', {
 maps.geojsonExample.scrollWheelZoom.disable();
 maps.geojsonExample.touchZoom.disable();
 
-L.mapbox.featureLayer().addTo(maps.geojsonExample).setGeoJSON(geojsonData);
+L.mapbox.featureLayer().addTo(maps.geojsonExample).setGeoJSON(importData.geojson);
 
 // Example: Swiping between layers
 // ===================
@@ -252,7 +245,7 @@ maps.kml = L.mapbox.map('map-kml', 'mapbox.satellite', {
 maps.kml.scrollWheelZoom.disable();
 maps.kml.touchZoom.disable();
 
-omnivore.kml('/js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
+// omnivore.kml('/js/kml-data.kml', null, kmlTheme).addTo(maps.kml);
 
 // Paging controls
 // ===================
@@ -264,7 +257,7 @@ function page(_this, state) {
   var index = 0;
 
   // Find the current index
-  slides.forEach((s, i) => {
+  slides.forEach(function(s, i) {
     if (s.id === current.node().id) index = i;
   });
 
@@ -301,7 +294,7 @@ function example(_this, state) {
   var index = 0;
 
   // Find the current index
-  examples.forEach((e, i) => {
+  examples.forEach(function(e, i) {
     if (e.title === titleCard.node().textContent) index = i;
   });
 

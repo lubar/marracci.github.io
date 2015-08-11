@@ -1,4 +1,4 @@
-module.exports = [{
+importData.geojson = [{
   'type': 'FeatureCollection',
   'features': [
     {

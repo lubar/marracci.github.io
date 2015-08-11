@@ -1,4 +1,4 @@
-module.exports = [{
+importData.coverage = [{
   section: 'Central America',
   coverage: [
     'El Salvador',
