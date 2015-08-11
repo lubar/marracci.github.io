@@ -100,7 +100,7 @@ bm.select('span').text(basemapExamples[0].title);
 var vividExamples = [
   { title: 'Country A', coords: '-16.2114,128.2324', zoom: 10 },
   { title: 'Boston', coords: '42.36,-71', zoom: 11 },
-  { title: 'Madrid', coords: '40.4,-3.7', zoom: 11 },
+  { title: 'Paris - de Gaulle Airport', coords: '49.0206,2.5405', zoom: 17 },
   { title: 'Jerusalem', coords: '31.76,35.2', zoom: 11}
 ];
 
