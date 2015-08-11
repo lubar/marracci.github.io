@@ -75,7 +75,7 @@ d3.selectAll('[name="vivid-toggle"]').on('change', function() {
 // ===================
 var basemapExamples = [
   { title: 'Washington DC', coords: '38.87297,-77.00732', zoom: 16 },
-  { title: 'Boston', coords: '42.36,-71', zoom: 11 },
+  { title: 'Seattle', coords: '47.6049,-122.3375', zoom: 16 },
   { title: 'Madrid', coords: '40.4,-3.7', zoom: 11 },
   { title: 'Jerusalem', coords: '31.76,35.2', zoom: 11}
 ];
@@ -99,9 +99,9 @@ bm.select('span').text(basemapExamples[0].title);
 // ===================
 var vividExamples = [
   { title: 'Country A', coords: '-16.2114,128.2324', zoom: 10 },
-  { title: 'Boston', coords: '42.36,-71', zoom: 11 },
+  { title: 'Sydney Harbor', coords: '-33.859,151.205', zoom: 15 },
   { title: 'Paris - de Gaulle Airport', coords: '49.01358,2.54466', zoom: 17 },
-  { title: 'Jerusalem', coords: '31.76,35.2', zoom: 11}
+  { title: 'Cabo San Lucas', coords: '22.8808,-109.9051', zoom: 16}
 ];
 
 var v = d3.select('#map-vivid');
