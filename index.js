@@ -75,9 +75,9 @@ d3.selectAll('[name="vivid-toggle"]').on('change', function() {
 // ===================
 var basemapExamples = [
   { title: 'Washington DC', coords: '38.87297,-77.00732', zoom: 16 },
-  { title: 'Seattle', coords: '47.6049,-122.3375', zoom: 16 },
-  { title: 'Madrid', coords: '40.4,-3.7', zoom: 11 },
-  { title: 'Jerusalem', coords: '31.76,35.2', zoom: 11}
+  { title: 'Seattle', coords: '47.6049,-122.3426', zoom: 16 },
+  { title: 'Madrid', coords: '40.4,-3.705', zoom: 14 },
+  { title: 'Jerusalem', coords: '31.76,35.2', zoom: 15}
 ];
 
 maps.basemap = L.mapbox.map('basemap', 'mapbox.satellite', {
