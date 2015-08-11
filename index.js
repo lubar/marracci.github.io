@@ -229,7 +229,7 @@ maps.swipe.setView([49.434, -123.272], 7);
 // Example: Loading KML data
 // ===================
 var kmlTheme = L.geoJson(null, {
-  style() {
+  style: function() {
     return {
       'color': '#fa946e',
       'opacity': 1,
